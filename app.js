@@ -14,7 +14,7 @@ let vm = new Vue({
         todo: ''
     },
     methods: {
-        addTodo(ev) {
+        addTodo() {
             this.list.push({
                 title: this.todo
             })

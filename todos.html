@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="../common.css"> -->
+    <link rel="stylesheet" href="index.css">
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div class="page-top">
+        <div class="page-content">
+            <h2>任务计划列表</h2>
+        </div>
+    </div>
+    <div class="main">
+        <h3 class="big-title">添加任务：</h3>
+        <input 
+            type="text"
+            placeholder="例如：新年计划"
+            class="task-input"
+            v-model="todo"
+            @keyup.13="addTodo"
+        />
+        <ul class="task-count" >
+            <li>个任务未完成</li>
+            <li class="action">
+                <a href="#all" >所有任务</a>
+                <a href="#unfinishedList" >未完成的任务</a>
+                <a href="#finishedList" >完成的任务</a>
+            </li>
+        </ul>
+        <h3 class="big-title">任务列表：</h3>
+        <div class="tasks">
+            <span class="no-task-tip" >还没有添加任何任务</span>
+            <ul class="todo-list">
+                <li v-for="item in list"
+                    class="todo completed" 
+                />  
+                    <div class="view">
+                        <input class="toggle" type="checkbox" >
+                        <label for="" >{{ item.title }}</label>
+                        <button class="destroy" ></button>
+                    </div>
+                    <input 
+                        class="edit"
+                        type="text" 
+                    >
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="./app.js"></script>
+</body>
+</html>

@@ -28,15 +28,15 @@
             <li>{{ noCheckedLength }}个任务未完成</li>
             <li class="action">
                 <a href="#all" >所有任务</a>
-                <a href="#unfinishedList" >未完成的任务</a>
-                <a href="#finishedList" >完成的任务</a>
+                <a href="#unfinished" >未完成的任务</a>
+                <a href="#finished" >完成的任务</a>
             </li>
         </ul>
         <h3 class="big-title">任务列表：</h3>
         <div class="tasks">
             <span class="no-task-tip" v-show="!list.length" >还没有添加任何任务</span>
             <ul class="todo-list">
-                <li v-for="item in list"
+                <li v-for="item in filteredList"
                     class="todo"
                     :class="{ completed: item.isChecked, editing: item === editorTodos }" 
                 />  

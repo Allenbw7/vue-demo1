@@ -22,10 +22,10 @@
             placeholder="例如：新年计划"
             class="task-input"
             v-model="todo"
-            @keyup.13="addTodo"
+            @keyup.13="addTodo(todo)"
         />
-        <ul class="task-count" >
-            <li>个任务未完成</li>
+        <ul class="task-count" v-show="list.length" >
+            <li>{{ noCheckedLength }}个任务未完成</li>
             <li class="action">
                 <a href="#all" >所有任务</a>
                 <a href="#unfinishedList" >未完成的任务</a>
@@ -34,19 +34,25 @@
         </ul>
         <h3 class="big-title">任务列表：</h3>
         <div class="tasks">
-            <span class="no-task-tip" >还没有添加任何任务</span>
+            <span class="no-task-tip" v-show="!list.length" >还没有添加任何任务</span>
             <ul class="todo-list">
                 <li v-for="item in list"
-                    class="todo completed" 
+                    class="todo"
+                    :class="{ completed: item.isChecked, editing: item === editorTodos }" 
                 />  
                     <div class="view">
-                        <input class="toggle" type="checkbox" >
-                        <label for="" >{{ item.title }}</label>
-                        <button class="destroy" ></button>
+                        <input class="toggle" type="checkbox" v-model="item.isChecked" >
+                        <label for="" @dblclick="editorTodo(item)" >{{ item.title }}</label>
+                        <button class="destroy" @click="deleteTodo(item)" ></button>
                     </div>
                     <input 
                         class="edit"
                         type="text" 
+                        v-model="item.title"
+                        v-focus="item === editorTodos"
+                        @blur="editorTodoed"
+                        @keyup.13="editorTodoed"
+                        @keyup.esc="cancelTodo(item)"
                     >
                 </li>
             </ul>

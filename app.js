@@ -65,7 +65,12 @@ let vm = new Vue({
         },
         //筛选列表
         filteredList() {
-            return filter[this.visibility] ? filter[this.visibility](this.list) : this.list;
+            //地址栏输入不存在的hash恢复为all
+            if(!filter[this.visibility]) {
+                this.visibility = window.location.hash = 'all';
+            }
+            return filter[this.visibility](this.list);
+            //return filter[this.visibility] ? filter[this.visibility](this.list) : this.list;
         }
     },
     methods: {
